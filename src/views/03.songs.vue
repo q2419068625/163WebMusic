@@ -41,6 +41,16 @@
         </tr>
       </tbody>
     </table>
+    <!-- 分页器 -->
+    <el-pagination
+      @current-change="handleCurrentChange"
+      background
+      layout="prev, pager, next"
+      :total="total"
+      :current-page="page"
+      :page-size="20"
+    >
+    </el-pagination>
   </div>
 </template>
 
@@ -53,7 +63,9 @@ export default {
     return {
       //最新音乐
       list:[],
-      tag:'0'
+      tag:'0',
+      total:0,
+      page:0
     };
   },
   created() {
@@ -65,7 +77,9 @@ export default {
       url:'https://autumnfish.cn/top/song',
       method:'get',
       params:{
-        type:this.tag
+        type:this.tag,
+        limit: 10,
+
       }
     }).then((res)=>{
       // console.log(res)
@@ -84,7 +98,9 @@ export default {
       const {url} = res.data.data[0]
         this.$parent.musicUrl = url
     })
-
+    },
+    handleCurrentChange(val){
+        console.log(val)
     }
   },
   watch: {

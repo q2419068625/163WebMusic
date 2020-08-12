@@ -109,13 +109,13 @@
       <div class="tab-content">
         <div class="items">
           <div class="item" v-for="(item, index) in list" :key="index">
-            <div class="img-wrap">
+            <div class="img-wrap" @click="toPlayList(item.id)">
               <div class="num-wrap">
                 播放量:
                 <span class="num">{{ item.playCount }}</span>
               </div>
               <img :src="item.coverImgUrl" alt="" />
-              <span class="iconfont icon-play"></span>
+              <span class="iconfont icon-play" @click="toPlayList(item.id)"></span>
             </div>
             <p class="name">{{ item.name }}</p>
           </div>
@@ -185,6 +185,9 @@ export default {
       this.page = val
       this.listData()
     },
+    toPlayList(id){
+       this.$router.push('/playlist?id='+id)
+    }
   },
   created() {
     this.topData()

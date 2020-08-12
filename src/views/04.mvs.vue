@@ -63,11 +63,11 @@
     <!-- 推荐MV -->
     <div class="mvs">
       <div class="items">
-        <div class="item" @click="toMv(10)" v-for="(item,index) in list" :key="index">
-          <div class="img-wrap">
+        <div class="item"  v-for="(item,index) in list" :key="index">
+          <div class="img-wrap" @click="toMv(item.id)">
             <img :src="item.cover" alt="" />
             <div class="num-wrap">
-              <div class="iconfont icon-play"></div>
+              <div class="iconfont icon-play"  @click="toMv(item.id)"></div>
               <div class="num">{{item.playCount}}</div>
             </div>
           </div>
@@ -117,6 +117,7 @@ export default {
   },
   methods: {
     toMv(id) {
+      // console.log(id)
       this.$router.push(`/mv?id=${id}`);
     },
     handleCurrentChange(val) {
@@ -145,7 +146,6 @@ export default {
             this.list[i].playCount = parseInt(this.list[i].playCount/10000)+'万'
           }
         }
-
         //总条数 
         if(res.data.count){
           this.total = res.data.count

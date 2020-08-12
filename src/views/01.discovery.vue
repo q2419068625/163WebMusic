@@ -14,11 +14,11 @@
       <div class="items">
         <div class="item" v-for="(item,index) in list" :key="index">
           <div class="img-wrap">
-            <div class="desc-wrap">
+            <div class="desc-wrap" @click="toPlayList(item.id)">
               <span class="desc">{{item.copywriter}}</span>
             </div>
             <img :src="item.picUrl" alt="" />
-            <span class="iconfont icon-play"></span>
+            <span class="iconfont icon-play" @click="toPlayList(item.id)"></span>
           </div>
           <p class="name">{{item.name}}</p>
         </div>
@@ -52,7 +52,7 @@
         <div class="item" v-for="(item,index) in mvs" :key="index">
           <div class="img-wrap">
             <img :src="item.picUrl" alt="" />
-            <span class="iconfont icon-play"></span>
+            <span class="iconfont icon-play" @click="toMv(item.id)"></span>
             <div class="num-wrap">
               <div class="iconfont icon-play"></div>
               <div class="num">{{item.playCount}}</div>
@@ -97,7 +97,14 @@ export default {
         this.$parent.musicUrl = url
         // console.log(res)
       })
-    }
+    },
+    toPlayList(id){
+       this.$router.push('/playlist?id='+id)
+    },
+     toMv(id) {
+      //  console.log(id)
+      this.$router.push(`/mv?id=${id}`);
+    },
   },
   created() {
     //轮播图
